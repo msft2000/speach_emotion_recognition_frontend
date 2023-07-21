@@ -1,14 +1,14 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { GeneralProvider } from "../context";
-import { Login } from "../pages/Login";
+import { SinglePage } from "../pages/SinglePage";
 
 function App() {
     return (
         <BrowserRouter>
             <GeneralProvider>
                 <Routes>
-                    <Route path="/" element={<Login />} />
+                    <Route path="/" element={<SinglePage />} />
                 </Routes>
             </GeneralProvider>
         </BrowserRouter>
