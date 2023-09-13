@@ -32,6 +32,10 @@ function SinglePage() {
             echoCancellation: true,
           }}
           downloadFileExtension="web3"
+          onClick={()=>{
+            setAudioWeb3(null)
+            setRespuesta(null)
+          }}
         />
         {audioWeb3 && <audio controls src={audioWeb3} />}
         {respuesta && !respuesta.error && (
