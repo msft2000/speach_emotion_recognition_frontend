@@ -20,7 +20,7 @@ function SinglePage() {
       .then((response) => {
         setRespuesta(response);
         toast.dismiss(toastId);
-        toast.success('Success', {duration:500});
+        toast.success('Success', {duration:1000});
       });
   };
   return (
