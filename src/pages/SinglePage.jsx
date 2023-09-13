@@ -1,11 +1,13 @@
 import React from "react";
 import { AudioRecorder } from "react-audio-voice-recorder";
+import toast, { Toaster } from 'react-hot-toast'; 
 import "../scss/SinglePage.scss";
 
 function SinglePage() {
   const [audioWeb3, setAudioWeb3] = React.useState(null);
   const [respuesta, setRespuesta] = React.useState(null);
   const sendAudioToApi = (blob) => {
+    const toastId = toast.loading('Loading...');
     const url = URL.createObjectURL(blob);
     setAudioWeb3(url);
     const formData = new FormData();
@@ -16,8 +18,8 @@ function SinglePage() {
     })
       .then((response) => response.json())
       .then((response) => {
-        console.log("Success:", response);
         setRespuesta(response);
+        toast.dismiss(toastId);
       });
   };
   return (
@@ -25,7 +27,6 @@ function SinglePage() {
       <h1>Speach Emotion Recognition</h1>
       <div className="recorder--container">
         <AudioRecorder
-          onRec
           onRecordingComplete={sendAudioToApi}
           audioTrackConstraints={{
             noiseSuppression: true,
@@ -63,6 +64,7 @@ function SinglePage() {
           </div>
         )}
       </div>
+      <Toaster />
     </div>
   );
 }
