@@ -1,13 +1,13 @@
 import React from "react";
 import { AudioRecorder } from "react-audio-voice-recorder";
-import toast, { Toaster } from 'react-hot-toast'; 
+import toast, { Toaster } from "react-hot-toast";
 import "../scss/SinglePage.scss";
 
 function SinglePage() {
   const [audioWeb3, setAudioWeb3] = React.useState(null);
   const [respuesta, setRespuesta] = React.useState(null);
   const sendAudioToApi = (blob) => {
-    const toastId = toast.loading('Loading...');
+    const toastId = toast.loading("Loading...");
     const url = URL.createObjectURL(blob);
     setAudioWeb3(url);
     const formData = new FormData();
@@ -20,7 +20,7 @@ function SinglePage() {
       .then((response) => {
         setRespuesta(response);
         toast.dismiss(toastId);
-        toast.success('Success', {duration:1000});
+        toast.success("Success", { duration: 1000 });
       });
   };
   return (
@@ -34,12 +34,18 @@ function SinglePage() {
             echoCancellation: true,
           }}
           downloadFileExtension="web3"
-          onClick={()=>{
-            setAudioWeb3(null)
-            setRespuesta(null)
+          onClick={() => {
+            setAudioWeb3(null);
+            setRespuesta(null);
           }}
         />
         {audioWeb3 && <audio controls src={audioWeb3} />}
+        {respuesta && respuesta.error && (
+          <div className="respuesta">
+            <h2>Error</h2>
+            <p>{respuesta.error}</p>
+          </div>
+        )}
         {respuesta && !respuesta.error && (
           <div className="respuesta">
             {/* emotions:'calm', 'happy', 'fearful', 'disgust' */}
